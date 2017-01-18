@@ -2,8 +2,6 @@
 Lempel-Ziv Welch decompressor (StarLeaf intern challenge)
 by Myles Rankin ~ 2017
 '''
-import codecs, re
-
 def fileHandler(file):
     ''' handles file, outputs data '''
     file = open(file, "rb")
@@ -19,7 +17,7 @@ def generateAsciiDict(dictSize):
     return dictionary
 
 def bitConverter(bitstring):
-    ''' converts raw file contents to 12-bit tokens with 16-bit padding for odd code strings '''
+    ''' converts 8-bit raw file contents to 12-bit tokens with 16-bit padding for odd code strings '''
     raw = []
     for i in bitstring:
         b = bin(i).replace("0b","")
@@ -48,7 +46,7 @@ def lzwDecompress(compressed):
             w = dictionary[k]
             dictionary[len(dictionary)] = temp+w[0]
         else:
-            dictionary[len(dictionary)] = w + w[0]
+            dictionary[len(dictionary)] = w+w[0]
             w = dictionary[k]
         result += w
         if len(dictionary) == 4096:
