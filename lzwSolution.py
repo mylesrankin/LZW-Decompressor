@@ -36,6 +36,7 @@ def bitConverter(bitstring):
     return converted
 
 def lzwDecompress(compressed):
+    ''' applies LZW Decompression algorithm to compressed data (in integer format), then returns result'''
     dictionary = generateAsciiDict(256)
     k = compressed.pop(0)
     w = dictionary[k]
@@ -52,57 +53,10 @@ def lzwDecompress(compressed):
         result += w
         if len(dictionary) == 4096:
             dictionary = generateAsciiDict(256)
-    print(result)
-    return result
-    
-
-b = bitConverter(fileHandler("compressedfile4.z"))
-lzwDecompress(b)
-
-
-
-''' other things
-binary = re.finditer('.{%s}'%chunksize, raw)
-
-old:
-
-def bitConverter(bitString):
-    binary = bin(int(codecs.encode(bitString,"hex_codec"),16))
-    binary = binary.replace("b","")
-    if len(binary)%12 != 0:
-        binary = split(binary,12)
-        binary[-1] = "0"*(16-len(binary[-1]))+binary[-1]
-    else:
-        print("No padding needed")
-        binary = split(binary,12)
-    print(binary)
-    return binary
-
-def split(string,n):
-    result = []
-    counter = 0
-    while string != "":
-        if counter == n:
-            result.append(string[:n])
-            string = string[n:]
-            counter = 0
-        else:
-            counter += 1
     return result
 
-    for i in range(0,len(compressed)-1):
-        char = chr(int(compressed[i],2))
-        w = char + chr(int(compressed[i-1],2))
-        print(char)
-        if char in _ascii.values():
-            result += char
-            prev = char
-        elif compressed[i] != 0 and w not in _ascii.values():
-            print(w)
-            n = max(_ascii, key=_ascii.get)+1
-            _ascii[n] = w
-
-            
-'''
-
-#print(len(b)%12)
+if __name__ == "__main__":
+    data = fileHandler("compressedfile3.z")
+    compressed = bitConverter(data)
+    decompressed = lzwDecompress(compressed)
+    print(decompressed)
