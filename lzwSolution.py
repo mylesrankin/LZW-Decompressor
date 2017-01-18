@@ -27,10 +27,10 @@ def bitConverter(bitstring):
     converted = []
     for i in range(1,len(raw)-1,3):                 # Generates 2 12-bit tokens from every 3 bits
         if len(raw[i]) != 16:
-            b1 = raw[i-1]+raw[i][:4]
+            b1 = raw[i-1]+raw[i][:4]                # Creates new bytes from the 3 bytes
             b2 = raw[i][4:]+raw[i+1]
-            converted.append(int(b1,2))
-            converted.append(int(b2,2))
+            converted.append(int(b1,2))             # Convert from binary to integer before appending
+            converted.append(int(b2,2))             # Integer format is easier to deal with later
     return converted
 
 def lzwDecompress(compressed):
