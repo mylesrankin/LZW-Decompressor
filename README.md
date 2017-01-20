@@ -1,5 +1,5 @@
 # LZW-Decompressor
-Lempel-Ziv Welch (LZW) decompressor for an internship challenge
+Lempel-Ziv Welch (LZW) decompressor using 12-bit fixed codes with a 16-bit padding rule. This is for an internship challenge.
 
 Helpful reading & resources used:
 
